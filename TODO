@@ -1,0 +1,9 @@
+da se dodade username i da se dodade evidencija za dodadeni/izbrishani
+da se dodade opcija na menu kopce u inside za check exp date
+
+serif bold, size 25px, color:4a4a4a, border=grow 1px, border color white; 
+copy layer na active button + max add brightness...
+
+tabela za notes i ke se menadzira u realtime, znachi kd ke se dodade nov note
+odma se dodava i u bazu, a kd se brishe note, ondak se brishe i od bazu spored
+sodrzinu (ne spored id), poshto i da ima ist takv element ne e bitno koj e izbrishan...

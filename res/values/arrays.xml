@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <string-array name="type">
+    <item>Milk</item>
+    <item>Cheese</item>
+    <item>Eggs</item>
+    <item>Butter</item>
+    <item>Ham</item>
+    <item>Sausage</item>
+    <item>Fish</item>
+    <item>Meat</item>
+    <item>Mayonnaise</item>
+    <item>Ketchup</item>
+    <item>Mustard</item>
+    <item>Leftovers</item>
+    <item>Fruit</item>
+    <item>Vegetables</item>
+    <item>Pickles</item>
+    <item>Cake</item>
+    <item>Cream</item>
+    <item>Jam</item>
+    <item>Ajvar</item>
+    <item>Drinks</item>
+    <item>Other</item>
+  </string-array>
+  
+  <string-array name="qtype">
+  	<item>Kilogram</item>
+  	<item>gram</item>
+  	<item>liters</item>
+  	<item>peaces</item>
+  </string-array>
+   
+</resources>

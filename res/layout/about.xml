@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+
+
+<ImageView
+	android:src="@drawable/icon" 
+	android:id="@+id/about_icon" 
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:paddingTop="10dip"
+	android:paddingLeft="10dip"
+	android:paddingBottom="20dip"
+	/>
+	
+<TextView 
+	android:text="@string/app_name" 
+	android:layout_height="wrap_content" 
+	android:layout_width="fill_parent" 
+	android:id="@+id/appname"
+	android:layout_toRightOf="@id/about_icon"
+	android:textSize="28dip"
+	android:typeface="serif"
+	android:textColor="#101010"
+	android:paddingTop="15dip"
+	android:paddingLeft="2dip"
+	android:paddingRight="10dip"
+	android:paddingBottom="20dip"
+	/>
+	
+	<LinearLayout
+		android:layout_below="@+id/appname"
+		android:id="@+id/app_about_txt"
+    	android:orientation="vertical"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_weight="0.75"
+    	android:paddingLeft="20dp"
+    	android:paddingRight="20dp">
+    	
+    	<LinearLayout
+    		android:orientation="vertical"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:background="#eef7ff"
+    		android:layout_marginTop = "10dp">
+    	
+    		<TextView
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:text="@string/about1"
+    		android:textSize="17dip"
+    		android:textColor="#061015"
+    		android:gravity="center_vertical"
+    		android:paddingLeft="10dip"
+    		android:paddingRight="10dip"
+    		android:paddingTop="15dip"
+    		></TextView>
+    		
+    		<TextView
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:text="@string/about2"
+    		android:textSize="17dip"
+    		android:textColor="#061015"
+    		android:gravity="center_vertical"
+    		android:paddingLeft="10dip"
+    		android:paddingRight="10dip"
+    		android:paddingBottom="10dip"
+    		android:paddingTop="7dip"
+    		></TextView>
+    		
+    	</LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+		android:layout_below="@+id/app_about_txt"
+		android:id="@+id/app_about_txt_2"
+    	android:orientation="vertical"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_weight="0.80"
+    	android:paddingLeft="20dp"
+    	android:paddingRight="20dp"
+    	android:paddingTop="10dip">
+    	
+    	<LinearLayout
+    		android:orientation="vertical"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:background="#eef7ff"
+    		android:layout_marginTop = "10dp">
+    	
+    		<TextView
+    		android:id="@+id/app_about_txt"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:text="@string/note"
+    		android:textSize="16dp"
+    		android:textColor="#10203f"
+    		android:gravity="center_vertical"
+			android:paddingLeft="7dip"
+    		android:paddingRight="7dip"
+    		android:paddingTop="10dip"
+    		android:paddingBottom="10dip"
+    		></TextView>
+    	</LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
+</ScrollView>

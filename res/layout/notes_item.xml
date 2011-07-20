@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/notes_text_item"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:textSize="20dip"
+    android:textColor="#4e4e4e"
+    android:textStyle="bold"
+    android:layout_marginLeft="20dip"
+    >
+</TextView>
