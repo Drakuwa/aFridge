@@ -30,6 +30,7 @@ public class temp extends ListActivity {
 	private SimpleAdapter settings;
 	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
 	ArrayList<String> result = new ArrayList<String>();
+	ArrayList<String> item_to_modify = new ArrayList<String>();
 	private String name = "";
 	private String type = "";
 	private String quantity = "";
@@ -44,6 +45,18 @@ public class temp extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.temp);
+
+		if (getIntent().getStringArrayListExtra("item_to_modify") != null)
+			item_to_modify.addAll(getIntent().getStringArrayListExtra(
+					"item_to_modify"));
+		if (!item_to_modify.isEmpty()) {
+			name = item_to_modify.get(0);
+			type = item_to_modify.get(1);
+			quantity = item_to_modify.get(2);
+			qtype = item_to_modify.get(3);
+			details = item_to_modify.get(4);
+			exp_date = item_to_modify.get(5);
+		}
 
 		HashMap<String, String> item = new HashMap<String, String>();
 		item.put("line1", "Enter name:");
@@ -247,7 +260,7 @@ public class temp extends ListActivity {
 	public void exp_date() {
 
 		Calendar c = Calendar.getInstance();
-				
+
 		mYear = c.get(Calendar.YEAR);
 		mMonth = c.get(Calendar.MONTH);
 		mDay = c.get(Calendar.DAY_OF_MONTH);
