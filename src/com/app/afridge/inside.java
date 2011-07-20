@@ -29,6 +29,7 @@ public class inside extends Activity {
 	private static final int ADD_ITEM = 1;
 	Model model;
 	ArrayList<String> item = new ArrayList<String>();
+	ArrayList<String> item_to_modify = new ArrayList<String>();
 	DatabaseHelper myDb;
 	int temp = 0;
 	ImageAdapter ia;
@@ -49,8 +50,6 @@ public class inside extends Activity {
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				Toast.makeText(getApplicationContext(), "" + position,
-						Toast.LENGTH_SHORT).show();
 				handleItem(position);
 				temp = position;
 			}
@@ -106,17 +105,11 @@ public class inside extends Activity {
 			else if (c.getString(6).equalsIgnoreCase("false")) {
 				not_empty_dialog(position, c);
 			}
-			/*
-			 * do { String type = c.getString(2); } while (c.moveToNext());
-			 */
 		}
 
 	}
 
-	public void not_empty_dialog(int position, Cursor c) {
-
-		Toast.makeText(getApplicationContext(), "Ima item na mestoto...",
-				Toast.LENGTH_LONG).show();
+	public void not_empty_dialog(int position, final Cursor c) {
 
 		final Dialog dialog = new Dialog(this);
 
@@ -153,7 +146,14 @@ public class inside extends Activity {
 		Button change = (Button) dialog.findViewById(R.id.change);
 		change.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				addItem();
+				item_to_modify.clear();
+				item_to_modify.add(c.getString(1));
+				item_to_modify.add(c.getString(2));
+				item_to_modify.add(c.getString(3));
+				item_to_modify.add(c.getString(4));
+				item_to_modify.add(c.getString(5));
+				item_to_modify.add(c.getString(7));
+				addItem(true);
 				dialog.dismiss();
 			}
 		});
@@ -188,7 +188,7 @@ public class inside extends Activity {
 				false).setPositiveButton("Yes",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						addItem();
+						addItem(false);
 					}
 				});
 		builder.setNegativeButton("Cancel",
@@ -201,18 +201,24 @@ public class inside extends Activity {
 		alert.show();
 	}
 
-	public void addItem() {
+	public void addItem(boolean modify) {
+		if(modify){
+			//temp init = new temp(); //TODO 
+			//init.init(item_to_modify);
+			Intent intentAddItem = new Intent(this, temp.class);
+			intentAddItem.putStringArrayListExtra("item_to_modify", item_to_modify);
+			startActivityForResult(intentAddItem, ADD_ITEM);
+			
+		} else {
 		Intent intentAddItem = new Intent(this, temp.class);
 		startActivityForResult(intentAddItem, ADD_ITEM);
+		}
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		Log.d("xxx", "Vlezeno e vo onActivityResult, requestCode="
-				+ requestCode + " resultCode=" + resultCode
-				+ " Activity.RESULT_OK:" + Activity.RESULT_OK);
 		if (requestCode == ADD_ITEM)
 			if (resultCode == RESULT_OK) {
 				Log.d("xxx", "Vlezeno e vo if-ot");
