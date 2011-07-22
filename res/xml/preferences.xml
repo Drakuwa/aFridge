@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android"> 
+       
+  <CheckBoxPreference
+    android:key="PREF_EXP_DATE"
+    android:title="Autocheck Exp. Date?"
+    android:summary="Select if you want auto check on startup." 
+    android:defaultValue="false"
+  />
+  
+  <EditTextPreference
+  	android:key="PREF_WARNING"
+  	android:title="Exp. Date Warning"
+  	android:summary="Enter number of days left before warning: "
+  	android:defaultValue="3"
+  	android:inputType="number"
+  	
+  />
+  
+  <Preference
+   android:title="Show History"
+   android:summary="Show the usage history of the fridge."
+   android:key="PREF_SHOW_HISTORY" />
+   
+  <Preference
+   android:title="Clear History"
+   android:summary="Clear the usage history of the fridge."
+   android:key="PREF_CLEAR_HISTORY" />
+  
+  
+ 
+</PreferenceScreen>
