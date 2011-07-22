@@ -2,6 +2,7 @@ package com.app.afridge;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,7 +24,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class inside extends Activity {
@@ -32,6 +32,8 @@ public class inside extends Activity {
 	Model model;
 	ArrayList<String> item = new ArrayList<String>();
 	ArrayList<String> item_to_modify = new ArrayList<String>();
+	ArrayList<String> history_item = new ArrayList<String>();
+	ArrayList<String> tempArray = new ArrayList<String>();
 	DatabaseHelper myDb;
 	int temp = 0;
 	ImageAdapter ia;
@@ -44,12 +46,12 @@ public class inside extends Activity {
 		setContentView(R.layout.inside);
 
 		prefs = PreferenceManager
-		.getDefaultSharedPreferences(getApplicationContext());
+				.getDefaultSharedPreferences(getApplicationContext());
 
 		int warning_days = Integer.parseInt(prefs
-		.getString("PREF_WARNING", "3"));
+				.getString("PREF_WARNING", "3"));
 		model = new Model(this, warning_days);
-		
+
 		ia = new ImageAdapter(this);
 
 		GridView gridview = (GridView) findViewById(R.id.gridview);
@@ -130,27 +132,34 @@ public class inside extends Activity {
 		image.setImageResource(ia.getResourcePic(position));
 
 		TextView name = (TextView) dialog.findViewById(R.id.text_name);
-		if(!c.getString(1).equalsIgnoreCase(""))name.setText("- " + c.getString(1));
-		else name.setText("- name: none");
-		
+		if (!c.getString(1).equalsIgnoreCase(""))
+			name.setText("- " + c.getString(1));
+		else
+			name.setText("- name: none");
+
 		TextView type = (TextView) dialog.findViewById(R.id.text_type);
 		type.setText("- " + c.getString(2));
-		
+
 		TextView quant = (TextView) dialog.findViewById(R.id.text_quant);
-		if(!c.getString(3).equalsIgnoreCase(""))quant.setText("- "+c.getString(3));
-		else quant.setText("- quantity: unknown");
+		if (!c.getString(3).equalsIgnoreCase(""))
+			quant.setText("- " + c.getString(3));
+		else
+			quant.setText("- quantity: unknown");
 		TextView qtype = (TextView) dialog.findViewById(R.id.text_qtype);
 		qtype.setText(c.getString(4));
-		
-		
+
 		TextView details = (TextView) dialog.findViewById(R.id.text_details);
-		if(!c.getString(5).equalsIgnoreCase(""))details.setText("- "+c.getString(5));
-		else details.setText("- details: none");
-		
+		if (!c.getString(5).equalsIgnoreCase(""))
+			details.setText("- " + c.getString(5));
+		else
+			details.setText("- details: none");
+
 		TextView exp = (TextView) dialog.findViewById(R.id.text_exp);
-		if(!c.getString(7).equalsIgnoreCase(""))exp.setText("exp. date: "+c.getString(7));
-		else exp.setText("exp. date: unknown or none");		
-		
+		if (!c.getString(7).equalsIgnoreCase(""))
+			exp.setText("exp. date: " + c.getString(7));
+		else
+			exp.setText("exp. date: unknown or none");
+
 		Button change = (Button) dialog.findViewById(R.id.change);
 		change.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -178,6 +187,41 @@ public class inside extends Activity {
 				item.add(5, "");
 				item.add(6, "true");
 				item.add(7, "");
+
+				Cursor c = myDb.getItem(Integer.toString(temp));
+				history_item.clear();
+
+				int next_id;
+				Cursor c2 = myDb.getHistory();
+				if (c2.getCount() == 0) {
+					next_id = 0;
+				} else {
+					c2.moveToLast();
+					next_id = c2.getInt(0) + 1;
+				}
+
+				Calendar cal = Calendar.getInstance();
+
+				int mYear = cal.get(Calendar.YEAR);
+				int mMonth = cal.get(Calendar.MONTH);
+				int mDay = cal.get(Calendar.DAY_OF_MONTH);
+				int mHour = cal.get(Calendar.HOUR_OF_DAY);
+				int mMinute = cal.get(Calendar.MINUTE);
+
+				history_item.add(mHour + ":" + mMinute + " " + mDay + "-"
+						+ mMonth + "-" + mYear);
+				history_item.add("position:" + Integer.toString(temp));
+
+				history_item.add(c.getString(1));
+				history_item.add(c.getString(2));
+				history_item.add(c.getString(3));
+				history_item.add(c.getString(4));
+				history_item.add(c.getString(5));
+				history_item.add(c.getString(7));
+				history_item.add("Deleted");
+
+				boolean addToHistory = myDb.addToHistory(Integer
+						.toString(next_id), history_item);
 
 				boolean modify = myDb.modifyItem(item);
 				ia.refresh();
@@ -210,16 +254,15 @@ public class inside extends Activity {
 	}
 
 	public void addItem(boolean modify) {
-		if(modify){
-			//temp init = new temp(); //TODO 
-			//init.init(item_to_modify);
+		if (modify) {
 			Intent intentAddItem = new Intent(this, temp.class);
-			intentAddItem.putStringArrayListExtra("item_to_modify", item_to_modify);
+			intentAddItem.putStringArrayListExtra("item_to_modify",
+					item_to_modify);
 			startActivityForResult(intentAddItem, ADD_ITEM);
-			
+
 		} else {
-		Intent intentAddItem = new Intent(this, temp.class);
-		startActivityForResult(intentAddItem, ADD_ITEM);
+			Intent intentAddItem = new Intent(this, temp.class);
+			startActivityForResult(intentAddItem, ADD_ITEM);
 		}
 	}
 
@@ -237,27 +280,63 @@ public class inside extends Activity {
 				boolean modify = myDb.modifyItem(item);
 				ia.refresh();
 
-				Toast.makeText(
-						getApplicationContext(),
-						item.get(0) + item.get(1) + item.get(2) + item.get(3)
-								+ item.get(4), Toast.LENGTH_LONG).show();
+				// Here we add the new/modified item to the history table...
+				history_item.clear();
+				int next_id;
+				Cursor c = myDb.getHistory();
+				if (c.getCount() == 0) {
+					next_id = 0;
+				} else {
+					c.moveToLast();
+					next_id = c.getInt(0) + 1;
+				}
+
+				Calendar cal = Calendar.getInstance();
+
+				int mYear = cal.get(Calendar.YEAR);
+				int mMonth = cal.get(Calendar.MONTH);
+				int mDay = cal.get(Calendar.DAY_OF_MONTH);
+				int mHour = cal.get(Calendar.HOUR_OF_DAY);
+				int mMinute = cal.get(Calendar.MINUTE);
+
+				history_item.add(mHour + ":" + mMinute + " " + mDay + "-"
+						+ mMonth + "-" + mYear);
+				history_item.add("position:" + Integer.toString(temp));
+
+				tempArray.clear();
+				tempArray.addAll(data.getStringArrayListExtra("Item"));
+
+				history_item.add(tempArray.get(0));
+				history_item.add(tempArray.get(1));
+				history_item.add(tempArray.get(2));
+				history_item.add(tempArray.get(3));
+				history_item.add(tempArray.get(4));
+				history_item.add(tempArray.get(6));
+
+				if (data.getBooleanExtra("isModified", false)) {
+					history_item.add("Modified");
+				} else
+					history_item.add("Added");
+				boolean addToHistory = myDb.addToHistory(Integer
+						.toString(next_id), history_item);
 			}
 	}
-	
+
 	@Override
-    public boolean onCreateOptionsMenu(final Menu pMenu) {
-    pMenu.add(0, MENU_CHECK, Menu.NONE, "Check expiration dates!").setIcon(android.R.drawable.ic_menu_manage);
-    return true;
-    }
-	
+	public boolean onCreateOptionsMenu(final Menu pMenu) {
+		pMenu.add(0, MENU_CHECK, Menu.NONE, "Check expiration dates!").setIcon(
+				android.R.drawable.ic_menu_manage);
+		return true;
+	}
+
 	@Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-            switch(item.getItemId()) {
-                    case MENU_CHECK:
-                    	model.check_exp_date(true);
-                    	return true;
-                    default:
-                    	return true;
-            }
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case MENU_CHECK:
+			model.check_exp_date(true);
+			return true;
+		default:
+			return true;
+		}
 	}
 }

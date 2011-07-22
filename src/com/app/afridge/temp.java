@@ -40,15 +40,19 @@ public class temp extends ListActivity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
+	private boolean isModifying = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.temp);
 
-		if (getIntent().getStringArrayListExtra("item_to_modify") != null)
+		if (getIntent().getStringArrayListExtra("item_to_modify") != null) {
 			item_to_modify.addAll(getIntent().getStringArrayListExtra(
 					"item_to_modify"));
+			isModifying = true;
+		}
+
 		if (!item_to_modify.isEmpty()) {
 			name = item_to_modify.get(0);
 			type = item_to_modify.get(1);
@@ -129,6 +133,9 @@ public class temp extends ListActivity {
 				result.add("false");
 				result.add(exp_date);
 				Intent resultIntent = new Intent();
+				if (isModifying) {
+					resultIntent.putExtra("isModified", true);
+				}
 				resultIntent.putStringArrayListExtra("Item", result);
 				setResult(Activity.RESULT_OK, resultIntent);
 				finish();
