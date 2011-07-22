@@ -6,13 +6,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.database.SQLException;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -288,6 +297,55 @@ public class Model {
 				});
 		AlertDialog alert = builder.create();
 		alert.show();
+	}
+	
+	public void show_list(){
+		
+		tempArray.clear();
+		DatabaseHelper myDb = new DatabaseHelper(ctx);
+		{
+			try {
+				myDb.createDataBase();
+			} catch (IOException ioe) {
+				throw new Error("Unable to create database");
+			}
+			try {
+				myDb.openDataBase();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+			myDb.getReadableDatabase();
+		}
+		
+		Cursor c = myDb.getItems();
+		if (c.moveToFirst())
+        {
+            do {
+                tempArray.add(c.getString(0) + ": " + c.getString(1) + " "
+						+ c.getString(2) + " " + c.getString(3) + " "
+						+ c.getString(4) + " " + c.getString(5) + " "
+						+ c.getString(7) + "; ");
+            } while (c.moveToNext());
+        }
+		
+		Dialog dialog = new Dialog(ctx);
+
+		dialog.setContentView(R.layout.show_item);
+		dialog.setTitle("aFridge");
+		
+		dialog.setContentView(R.layout.list_items);
+		
+		TextView text = (TextView) dialog.findViewById(R.id.text);
+		text.setText("Items in fridge:");
+		ImageView image = (ImageView) dialog.findViewById(R.id.image);
+		image.setImageResource(R.drawable.icon);
+		
+		ListView lv = (ListView)dialog.findViewById(R.id.inside_items);
+		lv.setAdapter(new ArrayAdapter<String>(ctx, android.R.layout.simple_list_item_1, tempArray));
+		lv.setTextFilterEnabled(true);
+		
+		dialog.show();
+		
 	}
 
 }
