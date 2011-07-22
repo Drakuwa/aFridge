@@ -1,5 +1,6 @@
 package com.app.afridge;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -8,7 +9,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class prefs extends PreferenceActivity {
 
@@ -18,6 +18,7 @@ public class prefs extends PreferenceActivity {
 	public static final String PREF_CLEAR_HISTORY = "PREF_CLEAR_HISTORY";
 
 	SharedPreferences prefs;
+	Model model = new Model(this);
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -38,26 +39,29 @@ public class prefs extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 					public boolean onPreferenceClick(Preference preference) {
-						Toast.makeText(getBaseContext(),
-								"The SHOW history preference has been clicked",
-								Toast.LENGTH_SHORT).show();
+						Intent novIntent = new Intent(prefs.this, history.class);
+						startActivity(novIntent);
 						return true;
 					}
 
 				});
-		
+
 		Preference clearHistory = (Preference) findPreference("PREF_CLEAR_HISTORY");
 		clearHistory
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 					public boolean onPreferenceClick(Preference preference) {
-						Toast.makeText(getBaseContext(),
-								"The CLEAR history preference has been clicked",
-								Toast.LENGTH_SHORT).show();
+						model.clear_history();
 						return true;
 					}
 
 				});
 
+	}
+	
+	public void are_you_sure(){
+		
+		
+		
 	}
 }

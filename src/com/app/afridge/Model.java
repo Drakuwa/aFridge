@@ -30,6 +30,7 @@ public class Model {
 	int mDay;
 	ArrayList<String> passed_date = new ArrayList<String>();
 	ArrayList<String> warning_date = new ArrayList<String>();
+	ArrayList<String> tempArray = new ArrayList<String>();
 	SharedPreferences prefs;
 	int warning_days = 3;
 
@@ -215,6 +216,76 @@ public class Model {
 							public void onClick(DialogInterface dialog, int id) {
 							}
 						});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	public void show_history() {
+
+		tempArray.clear();
+		DatabaseHelper myDb = new DatabaseHelper(ctx);
+		{
+			try {
+				myDb.createDataBase();
+			} catch (IOException ioe) {
+				throw new Error("Unable to create database");
+			}
+			try {
+				myDb.openDataBase();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+			myDb.getReadableDatabase();
+		}
+		Cursor c = myDb.getHistory();
+
+		if (c.moveToFirst()) {
+			do {
+				tempArray.add(c.getString(1) + " " + c.getString(9) + " "
+						+ c.getString(2) + " " + c.getString(3) + " "
+						+ c.getString(4) + " " + c.getString(5) + " "
+						+ c.getString(6) + " " + c.getString(7) + " "
+						+ c.getString(8) + " ");
+			} while (c.moveToNext());
+		}
+		myDb.close();
+	}
+
+	public void clear_history() {
+		final DatabaseHelper myDb = new DatabaseHelper(ctx);
+		{
+			try {
+				myDb.createDataBase();
+			} catch (IOException ioe) {
+				throw new Error("Unable to create database");
+			}
+			try {
+				myDb.openDataBase();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+			myDb.getReadableDatabase();
+		}
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+		builder.setMessage("Are you sure you want to clear the history?")
+				.setIcon(R.drawable.icon).setTitle(R.string.app_name)
+				.setCancelable(true).setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								boolean clear = myDb.clearHistory();
+								Toast.makeText(ctx,
+										"History cleared!", Toast.LENGTH_LONG).show();
+								myDb.close();
+							}
+						});
+		builder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+						myDb.close();
+					}
+				});
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
