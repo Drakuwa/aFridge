@@ -39,6 +39,8 @@ public class inside extends Activity {
 	ImageAdapter ia;
 	SharedPreferences prefs;
 	private static final int MENU_CHECK = Menu.FIRST;
+	private static final int MENU_SETTINGS = MENU_CHECK + 1;
+	private static final int MENU_LIST = MENU_SETTINGS + 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -326,6 +328,10 @@ public class inside extends Activity {
 	public boolean onCreateOptionsMenu(final Menu pMenu) {
 		pMenu.add(0, MENU_CHECK, Menu.NONE, "Check expiration dates!").setIcon(
 				android.R.drawable.ic_menu_manage);
+		pMenu.add(0, MENU_SETTINGS, Menu.NONE, "Settings").setIcon(
+				android.R.drawable.ic_menu_preferences);
+		pMenu.add(0, MENU_LIST, Menu.NONE, "View List...").setIcon(
+				android.R.drawable.ic_menu_info_details);
 		return true;
 	}
 
@@ -334,6 +340,15 @@ public class inside extends Activity {
 		switch (item.getItemId()) {
 		case MENU_CHECK:
 			model.check_exp_date(true);
+			return true;
+
+		case MENU_SETTINGS:
+			Intent settingsActivity = new Intent(getBaseContext(), prefs.class);
+			startActivity(settingsActivity);
+			return true;
+			
+		case MENU_LIST:
+			model.show_list();
 			return true;
 		default:
 			return true;
