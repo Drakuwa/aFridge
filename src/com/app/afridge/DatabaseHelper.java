@@ -41,10 +41,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String KEY_DETAILS = "details";// 5
 	public static final String KEY_ISEMPTY = "isEmpty";// 6
 	public static final String KEY_EXPDATE = "exp_date";// 7
+
 	public static final String KEY_NOTE = "note";// 1
+
+	public static final String KEY_TIMESTAMP = "timestamp";// 1
+	public static final String KEY_ITEM_ID = "item_id";// 2
+	public static final String KEY_CHANGE = "change";// 9
 
 	private static final String DATABASE_TABLE = "fridge";
 	private static final String DATABASE_NOTES_TABLE = "notes";
+	private static final String DATABASE_HISTORY_TABLE = "history";
 
 	private SQLiteDatabase db;
 
@@ -57,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * @param context
 	 */
 	public DatabaseHelper(Context context) {
-		super(context, DB_NAME, null, 3);
+		super(context, DB_NAME, null, 4);
 		this.myContext = context;
 	}
 
@@ -155,7 +161,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		String myPath = DB_PATH + DB_NAME;
 		db = SQLiteDatabase.openDatabase(myPath, null,
-				SQLiteDatabase.CREATE_IF_NECESSARY); //namesto CREATE_IF_... beshe OPEN_READWRITE
+				SQLiteDatabase.CREATE_IF_NECESSARY); // namesto CREATE_IF_...
+		// beshe OPEN_READWRITE
 
 	}
 
@@ -198,8 +205,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				KEY_EXPDATE }, null, null, null, null, null);
 	}
 
-	
-
 	/**
 	 * SQL query function that returns a cursor showing the item with the given
 	 * name ID as the parameter "id".
@@ -239,7 +244,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return db.update(DATABASE_TABLE, updateValues, KEY_ROWID + "="
 				+ row.get(0), null) > 0;
 	}
-	
+
 	/**
 	 * SQL query function that returns a cursor showing all the notes from the
 	 * database.
@@ -273,9 +278,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public boolean deleteNote(String id) {
 		return db.delete(DATABASE_NOTES_TABLE, "_id=" + id, null) > 0;
 	}
-	
-	public boolean deleteAllNotes(){
+
+	public boolean deleteAllNotes() {
 		return db.delete(DATABASE_NOTES_TABLE, "_id like '%'", null) > 0;
+	}
+
+	/**
+	 * SQL query function that returns a cursor showing all the history notes
+	 * from the database.
+	 * 
+	 * @return
+	 */
+	public Cursor getHistory() {
+		return db.query(DATABASE_HISTORY_TABLE, new String[] { KEY_ROWID,
+				KEY_TIMESTAMP, KEY_ITEM_ID, KEY_NAME, KEY_TYPE, KEY_QUANT,
+				KEY_QTYPE, KEY_DETAILS, KEY_EXPDATE, KEY_CHANGE }, null, null,
+				null, null, null);
+	}
+
+	/**
+	 * SQL query function that adds a history note to the history table
+	 * 
+	 * @param note
+	 * @return
+	 */
+	public boolean addToHistory(String id, ArrayList<String> hist) {
+		ContentValues values = new ContentValues();
+		values.put(KEY_ROWID, id);
+		values.put(KEY_TIMESTAMP, hist.get(0));
+		values.put(KEY_ITEM_ID, hist.get(1));
+		values.put(KEY_NAME, hist.get(2));
+		values.put(KEY_TYPE, hist.get(3));
+		values.put(KEY_QUANT, hist.get(4));
+		values.put(KEY_QTYPE, hist.get(5));
+		values.put(KEY_DETAILS, hist.get(6));
+		values.put(KEY_EXPDATE, hist.get(7));
+		values.put(KEY_CHANGE, hist.get(8));
+
+		return db.insert(DATABASE_HISTORY_TABLE, null, values) > 0;
+	}
+
+	public boolean clearHistory() {
+		return db.delete(DATABASE_HISTORY_TABLE, "_id like '%'", null) > 0;
 	}
 
 }
