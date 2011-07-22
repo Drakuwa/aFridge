@@ -8,9 +8,11 @@ import java.util.Calendar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 /**
@@ -28,6 +30,8 @@ public class Model {
 	int mDay;
 	ArrayList<String> passed_date = new ArrayList<String>();
 	ArrayList<String> warning_date = new ArrayList<String>();
+	SharedPreferences prefs;
+	int warning_days = 3;
 
 	/**
 	 * Constructor of the Model class which initializes the activity context.
@@ -36,6 +40,11 @@ public class Model {
 	 */
 	public Model(Context context) {
 		ctx = context;
+	}
+
+	public Model(Context context, int warningDays) {
+		ctx = context;
+		warning_days = warningDays;
 	}
 
 	/**
@@ -143,7 +152,7 @@ public class Model {
 							continue;
 						} else if (Integer.parseInt(exdate[2]) == mYear
 								&& Integer.parseInt(exdate[1]) == mMonth
-								&& Integer.parseInt(exdate[0]) - mDay < 3) {
+								&& Integer.parseInt(exdate[0]) - mDay < warning_days) {
 							warning_date.add(Integer.parseInt(exdate[0]) - mDay
 									+ " day[s] left for " + cc.getString(0)
 									+ ": " + cc.getString(1) + " "

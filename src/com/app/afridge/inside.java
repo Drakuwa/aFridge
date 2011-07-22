@@ -8,9 +8,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +35,7 @@ public class inside extends Activity {
 	DatabaseHelper myDb;
 	int temp = 0;
 	ImageAdapter ia;
+	SharedPreferences prefs;
 	private static final int MENU_CHECK = Menu.FIRST;
 
 	@Override
@@ -40,7 +43,12 @@ public class inside extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.inside);
 
-		model = new Model(this);
+		prefs = PreferenceManager
+		.getDefaultSharedPreferences(getApplicationContext());
+
+		int warning_days = Integer.parseInt(prefs
+		.getString("PREF_WARNING", "3"));
+		model = new Model(this, warning_days);
 		
 		ia = new ImageAdapter(this);
 
