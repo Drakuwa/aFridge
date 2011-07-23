@@ -5,8 +5,8 @@
     <string name="about2">Never again forget what you have in your refrigerator, let an item expire, or what you need to buy, with the help of this handy organizer application.</string>
     <string name="note">For more information, and a quick HOWTO check the \'Help\' section.</string>
     <string name="help1">- Organize your food by adding items in the virtual fridge by simply clicking on an empty spot. Click on an item to see a detailed view of the product, and choose if you want to delete, or change it. Dismiss the dialog without any changes by simply clicking the back button.</string>
-    <string name="help2">- Click the menu button inside the fridge, and you will see an option for checking the products expiration dates. The application will warn you for near expiration, and expired items, at every startup.</string>
+    <string name="help2">- Click the menu button inside the fridge, and you will see options for checking the products expiration dates, accessing the settings and viewing the items in a simple list. The application will warn you for near expiration, and expired items, at every startup if allowed in the settings.</string>
     <string name="help3">- Build a virtual shopping list in the \'Fridge Notes\' section. Just click on the empty text field, write a note and click the add button. Click on a note if you want to delete it, or click the menu button to get the option for deleting all the notes.</string>
-    <string name="help4"></string>
+    <string name="help4">- Click the menu button on the main screen to access the settings of the application where you can allow automatic expiration date check on every startup, set the minimum number of days for exp. date warning, and see/clear the history of usage.</string>
     <string name="contact">For questions, complains or compliments, contact me on my Twitter, Facebook, or Google+ page, or send me an E-mail.</string>
 </resources>
