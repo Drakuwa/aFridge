@@ -17,7 +17,9 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -321,19 +323,21 @@ public class Model {
 		if (c.moveToFirst())
         {
             do {
-                tempArray.add(c.getString(0) + ": " + c.getString(1) + " "
-						+ c.getString(2) + " " + c.getString(3) + " "
-						+ c.getString(4) + " " + c.getString(5) + " "
-						+ c.getString(7) + "; ");
+            	if(c.getString(6).equalsIgnoreCase("false")){
+            		tempArray.add(c.getString(0) + ": " + c.getString(1) + " "
+    						+ c.getString(2) + " " + c.getString(3) + " "
+    						+ c.getString(4) + " " + c.getString(5) + " "
+    						+ c.getString(7) + "; ");
+            	}
+                
             } while (c.moveToNext());
         }
 		
-		Dialog dialog = new Dialog(ctx);
+		final Dialog dialog = new Dialog(ctx);
 
-		dialog.setContentView(R.layout.show_item);
 		dialog.setTitle("aFridge");
 		
-		dialog.setContentView(R.layout.list_items);
+		dialog.setContentView(R.layout.list_items_dialog);
 		
 		TextView text = (TextView) dialog.findViewById(R.id.text);
 		text.setText("Items in fridge:");
@@ -344,7 +348,15 @@ public class Model {
 		lv.setAdapter(new ArrayAdapter<String>(ctx, android.R.layout.simple_list_item_1, tempArray));
 		lv.setTextFilterEnabled(true);
 		
+		Button dismiss = (Button) dialog.findViewById(R.id.dismiss);
+		dismiss.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		
 		dialog.show();
+		myDb.close();
 		
 	}
 

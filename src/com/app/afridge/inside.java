@@ -125,7 +125,7 @@ public class inside extends Activity {
 
 		final Dialog dialog = new Dialog(this);
 
-		dialog.setContentView(R.layout.show_item);
+		dialog.setContentView(R.layout.show_item_dialog);
 		dialog.setTitle("aFridge");
 
 		TextView text = (TextView) dialog.findViewById(R.id.text);
@@ -331,7 +331,7 @@ public class inside extends Activity {
 		pMenu.add(0, MENU_SETTINGS, Menu.NONE, "Settings").setIcon(
 				android.R.drawable.ic_menu_preferences);
 		pMenu.add(0, MENU_LIST, Menu.NONE, "View List...").setIcon(
-				android.R.drawable.ic_menu_info_details);
+				android.R.drawable.ic_menu_sort_alphabetically);
 		return true;
 	}
 
