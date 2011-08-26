@@ -40,7 +40,7 @@ public class history extends ListActivity {
 						+ c.getString(2) + " " + c.getString(3) + " "
 						+ c.getString(4) + " " + c.getString(5) + " "
 						+ c.getString(6) + " " + c.getString(7) + " "
-						+ c.getString(8) + ";");
+						+ c.getString(8));
 			} while (c.moveToNext());
 		}
 		myDb.close();
