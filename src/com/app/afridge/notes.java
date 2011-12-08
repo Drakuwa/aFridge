@@ -74,10 +74,10 @@ public class notes extends Activity {
 					int position, long id) {
 				createClickAlert(position, id);
 
-				Toast
-						.makeText(getApplicationContext(),
-								"id=" + id + " position=" + position,
-								Toast.LENGTH_LONG).show();
+				//Toast
+				//		.makeText(getApplicationContext(),
+				//				"id=" + id + " position=" + position,
+				//				Toast.LENGTH_LONG).show();
 			}
 		});
 	}
