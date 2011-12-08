@@ -116,7 +116,7 @@ public class Model {
 
 		Calendar c = Calendar.getInstance();
 		mYear = c.get(Calendar.YEAR);
-		mMonth = c.get(Calendar.MONTH);
+		mMonth = c.get(Calendar.MONTH) + 1;
 		mDay = c.get(Calendar.DAY_OF_MONTH);
 		String exp_date;
 

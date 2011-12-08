@@ -269,7 +269,7 @@ public class temp extends ListActivity {
 		Calendar c = Calendar.getInstance();
 
 		mYear = c.get(Calendar.YEAR);
-		mMonth = c.get(Calendar.MONTH);
+		mMonth = c.get(Calendar.MONTH) + 1;
 		mDay = c.get(Calendar.DAY_OF_MONTH);
 
 		DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -277,7 +277,7 @@ public class temp extends ListActivity {
 			public void onDateSet(DatePicker view, int year, int monthOfYear,
 					int dayOfMonth) {
 				mYear = year;
-				mMonth = monthOfYear;
+				mMonth = monthOfYear + 1;
 				mDay = dayOfMonth;
 				exp_date = Integer.toString(mDay) + "-"
 						+ Integer.toString(mMonth) + "-"
@@ -286,7 +286,7 @@ public class temp extends ListActivity {
 		};
 
 		DatePickerDialog dialog = new DatePickerDialog(this, mDateSetListener,
-				mYear, mMonth, mDay);
+				mYear, mMonth-1, mDay);
 		dialog.show();
 	}
 }

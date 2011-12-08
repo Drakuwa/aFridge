@@ -205,7 +205,7 @@ public class inside extends Activity {
 				Calendar cal = Calendar.getInstance();
 
 				int mYear = cal.get(Calendar.YEAR);
-				int mMonth = cal.get(Calendar.MONTH);
+				int mMonth = cal.get(Calendar.MONTH) + 1;
 				int mDay = cal.get(Calendar.DAY_OF_MONTH);
 				int mHour = cal.get(Calendar.HOUR_OF_DAY);
 				int mMinute = cal.get(Calendar.MINUTE);
@@ -296,7 +296,7 @@ public class inside extends Activity {
 				Calendar cal = Calendar.getInstance();
 
 				int mYear = cal.get(Calendar.YEAR);
-				int mMonth = cal.get(Calendar.MONTH);
+				int mMonth = cal.get(Calendar.MONTH) + 1;
 				int mDay = cal.get(Calendar.DAY_OF_MONTH);
 				int mHour = cal.get(Calendar.HOUR_OF_DAY);
 				int mMinute = cal.get(Calendar.MINUTE);
