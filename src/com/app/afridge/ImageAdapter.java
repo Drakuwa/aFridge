@@ -92,51 +92,197 @@ public class ImageAdapter extends BaseAdapter {
 			if (c.moveToFirst()) {
 				do {
 					String type = c.getString(2);
+					String state = c.getString(6); //true/false/warning/expired
 
 					if (type.equalsIgnoreCase("empty"))
 						pics[i] = R.drawable.empty_glass;
-					else if (type.equalsIgnoreCase("Milk"))
+					else if (type.equalsIgnoreCase("Milk")){
+						if(state.equalsIgnoreCase("false"))
 						pics[i] = R.drawable.item_milk;
-					else if (type.equalsIgnoreCase("Cheese"))
-						pics[i] = R.drawable.item_cheese;
-					else if (type.equalsIgnoreCase("Eggs"))
-						pics[i] = R.drawable.item_eggs;
+						else if(state.equalsIgnoreCase("warning"))
+						pics[i] = R.drawable.item_milk_warn;
+						else if(state.equalsIgnoreCase("expired"))
+						pics[i] = R.drawable.item_milk_exp;
+					}
+						
+					else if (type.equalsIgnoreCase("Cheese")){
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_cheese;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_cheese_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_cheese_exp;
+					}
+					else if (type.equalsIgnoreCase("Eggs")){
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_eggs;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_eggs_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_eggs_exp;
+					}
 					else if (type.equalsIgnoreCase("Butter"))
-						pics[i] = R.drawable.item_butter;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_butter;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_butter_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_butter_exp;
+					}
 					else if (type.equalsIgnoreCase("Ham"))
-						pics[i] = R.drawable.item_ham;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_ham;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_ham_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_ham_exp;
+					}
 					else if (type.equalsIgnoreCase("Sausage"))
-						pics[i] = R.drawable.item_sausage;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_sausage;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_sausage_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_sausage_exp;
+					}
 					else if (type.equalsIgnoreCase("Meat"))
-						pics[i] = R.drawable.item_meat;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_meat;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_meat_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_meat_exp;
+					}
 					else if (type.equalsIgnoreCase("Mayonnaise"))
-						pics[i] = R.drawable.item_mayo;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_mayo;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_mayo_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_mayo_exp;
+					}
 					else if (type.equalsIgnoreCase("Ketchup"))
-						pics[i] = R.drawable.item_ketchup;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_ketchup;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_ketchup_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_ketchup_exp;
+					}
 					else if (type.equalsIgnoreCase("Mustard"))
-						pics[i] = R.drawable.item_mustard;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_mustard;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_mustard_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_mustard_exp;
+					}
 					else if (type.equalsIgnoreCase("Leftovers"))
-						pics[i] = R.drawable.item_leftover;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_leftover;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_leftover_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_leftover_exp;
+					}
 					else if (type.equalsIgnoreCase("Fruit"))
-						pics[i] = R.drawable.item_fruit;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_fruit;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_fruit_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_fruit_exp;
+					}
 					else if (type.equalsIgnoreCase("Vegetables"))
-						pics[i] = R.drawable.item_veggie;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_veggie;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_veggie_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_veggie_exp;
+					}
 					else if (type.equalsIgnoreCase("Pickles"))
-						pics[i] = R.drawable.item_pickles;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_pickles;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_pickles_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_pickles_exp;
+					}
 					else if (type.equalsIgnoreCase("Cake"))
-						pics[i] = R.drawable.item_cake;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_cake;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_cake_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_cake_exp;
+					}
 					else if (type.equalsIgnoreCase("Cream"))
-						pics[i] = R.drawable.item_cream;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_cream;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_cream_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_cream_exp;
+					}
 					else if (type.equalsIgnoreCase("Jam"))
-						pics[i] = R.drawable.item_jam;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_jam;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_jam_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_jam_exp;
+					}
 					else if (type.equalsIgnoreCase("Ajvar"))
-						pics[i] = R.drawable.item_ajvar;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_ajvar;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_ajvar_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_ajvar_exp;
+					}
 					else if (type.equalsIgnoreCase("Drinks"))
-						pics[i] = R.drawable.item_drinks;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_drinks;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_drinks_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_drinks_exp;
+					}
 					else if (type.equalsIgnoreCase("Other"))
-						pics[i] = R.drawable.item_other;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_other;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_other_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_other_exp;
+					}
 					else if (type.equalsIgnoreCase("Fish"))
-						pics[i] = R.drawable.item_fish;
+					{
+						if(state.equalsIgnoreCase("false"))
+							pics[i] = R.drawable.item_fish;
+						else if(state.equalsIgnoreCase("warning"))
+							pics[i] = R.drawable.item_fish_warn;
+						else if(state.equalsIgnoreCase("expired"))
+							pics[i] = R.drawable.item_fish_exp;
+					}
 					i++;
 					Log.d("xxx", "" + pics[i - 1] + "i=" + (i - 1));
 				} while (c.moveToNext());

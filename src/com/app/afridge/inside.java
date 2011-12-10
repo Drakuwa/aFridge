@@ -114,7 +114,9 @@ public class inside extends Activity {
 		if (c.moveToFirst()) {
 			if (c.getString(6).equalsIgnoreCase("true"))
 				if_empty_dialog(position);
-			else if (c.getString(6).equalsIgnoreCase("false")) {
+			else if (c.getString(6).equalsIgnoreCase("false")
+					|| c.getString(6).equalsIgnoreCase("warning")
+					|| c.getString(6).equalsIgnoreCase("expired")) {
 				not_empty_dialog(position, c);
 			}
 		}
@@ -346,7 +348,7 @@ public class inside extends Activity {
 			Intent settingsActivity = new Intent(getBaseContext(), prefs.class);
 			startActivity(settingsActivity);
 			return true;
-			
+
 		case MENU_LIST:
 			model.show_list();
 			return true;
