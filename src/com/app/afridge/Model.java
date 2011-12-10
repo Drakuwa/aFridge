@@ -174,14 +174,14 @@ public class Model {
 					}
 
 				} while (cc.moveToNext());
-				if (!passed_date.isEmpty()&&!itemColor) {
+				if (!passed_date.isEmpty() && !itemColor) {
 					passed_exp();
 				}
-				if (!warning_date.isEmpty()&&!itemColor) {
+				if (!warning_date.isEmpty() && !itemColor) {
 					warning_exp();
 				}
 				if (passed_date.isEmpty() && warning_date.isEmpty()
-						&& callFromFridge) {
+						&& callFromFridge && !itemColor) {
 					ok_exp();
 				}
 				myDb.close();
@@ -277,7 +277,7 @@ public class Model {
 			}
 			myDb.getReadableDatabase();
 		}
-		
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setMessage("Are you sure you want to clear the history?")
 				.setIcon(R.drawable.icon).setTitle(R.string.app_name)
@@ -285,8 +285,8 @@ public class Model {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								boolean clear = myDb.clearHistory();
-								Toast.makeText(ctx,
-										"History cleared!", Toast.LENGTH_LONG).show();
+								Toast.makeText(ctx, "History cleared!",
+										Toast.LENGTH_LONG).show();
 								myDb.close();
 							}
 						});
@@ -300,9 +300,9 @@ public class Model {
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
-	
-	public void show_list(){
-		
+
+	public void show_list() {
+
 		tempArray.clear();
 		DatabaseHelper myDb = new DatabaseHelper(ctx);
 		{
@@ -318,46 +318,48 @@ public class Model {
 			}
 			myDb.getReadableDatabase();
 		}
-		
+
 		Cursor c = myDb.getItems();
-		if (c.moveToFirst())
-        {
-            do {
-            	if(c.getString(6).equalsIgnoreCase("false")){
-            		tempArray.add(c.getString(0) + ": " + c.getString(1) + " "
-    						+ c.getString(2) + " " + c.getString(3) + " "
-    						+ c.getString(4) + " " + c.getString(5) + " "
-    						+ c.getString(7) + "; ");
-            	}
-                
-            } while (c.moveToNext());
-        }
-		
+		if (c.moveToFirst()) {
+			do {
+				if (c.getString(6).equalsIgnoreCase("false")
+						|| c.getString(6).equalsIgnoreCase("warning")
+						|| c.getString(6).equalsIgnoreCase("expired")) {
+					tempArray.add(c.getString(0) + ": " + c.getString(1) + " "
+							+ c.getString(2) + " " + c.getString(3) + " "
+							+ c.getString(4) + " " + c.getString(5) + " "
+							+ c.getString(7) + "; ");
+				}
+
+			} while (c.moveToNext());
+		}
+
 		final Dialog dialog = new Dialog(ctx);
 
 		dialog.setTitle("aFridge");
-		
+
 		dialog.setContentView(R.layout.list_items_dialog);
-		
+
 		TextView text = (TextView) dialog.findViewById(R.id.text);
 		text.setText("Items in fridge:");
 		ImageView image = (ImageView) dialog.findViewById(R.id.image);
 		image.setImageResource(R.drawable.icon);
-		
-		ListView lv = (ListView)dialog.findViewById(R.id.inside_items);
-		lv.setAdapter(new ArrayAdapter<String>(ctx, android.R.layout.simple_list_item_1, tempArray));
+
+		ListView lv = (ListView) dialog.findViewById(R.id.inside_items);
+		lv.setAdapter(new ArrayAdapter<String>(ctx,
+				android.R.layout.simple_list_item_1, tempArray));
 		lv.setTextFilterEnabled(true);
-		
+
 		Button dismiss = (Button) dialog.findViewById(R.id.dismiss);
 		dismiss.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				dialog.dismiss();
 			}
 		});
-		
+
 		dialog.show();
 		myDb.close();
-		
+
 	}
 
 }

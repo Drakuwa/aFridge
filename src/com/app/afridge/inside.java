@@ -90,6 +90,12 @@ public class inside extends Activity {
 		myDb.close();
 		super.onDestroy();
 	}
+	
+	@Override
+	protected void onPause() {
+		myDb.close();
+		super.onPause();
+	}
 
 	@Override
 	protected void onResume() {
@@ -133,6 +139,16 @@ public class inside extends Activity {
 
 		TextView text = (TextView) dialog.findViewById(R.id.text);
 		text.setText("Item description:");
+		
+		TextView textState = (TextView) dialog.findViewById(R.id.textState);
+		String state = c.getString(6);
+		if(state.equalsIgnoreCase("false"))
+			textState.setText("State: OK");
+		else if(state.equalsIgnoreCase("warning"))
+			textState.setText("State: Soon to expire!");
+		else if(state.equalsIgnoreCase("expired"))
+			textState.setText("State: Expired!");
+		
 		ImageView image = (ImageView) dialog.findViewById(R.id.image);
 		image.setImageResource(ia.getResourcePic(position));
 
@@ -281,8 +297,9 @@ public class inside extends Activity {
 				item.clear();
 				item.add(0, Integer.toString(temp));
 				item.addAll(data.getStringArrayListExtra("Item"));
-
+				
 				boolean modify = myDb.modifyItem(item);
+				model.check_exp_date(true, true);
 				ia.refresh();
 
 				// Here we add the new/modified item to the history table...
