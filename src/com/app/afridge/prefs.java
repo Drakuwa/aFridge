@@ -12,11 +12,6 @@ import android.widget.Button;
 
 public class prefs extends PreferenceActivity {
 
-	public static final String PREF_EXP_DATE = "PREF_EXP_DATE";
-	public static final String PREF_WARNING = "PREF_WARNING";
-	public static final String PREF_SHOW_HISTORY = "PREF_SHOW_HISTORY";
-	public static final String PREF_CLEAR_HISTORY = "PREF_CLEAR_HISTORY";
-
 	SharedPreferences prefs;
 	Model model = new Model(this);
 
@@ -57,11 +52,5 @@ public class prefs extends PreferenceActivity {
 
 				});
 
-	}
-	
-	public void are_you_sure(){
-		
-		
-		
 	}
 }

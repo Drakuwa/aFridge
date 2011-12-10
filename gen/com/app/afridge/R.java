@@ -9,7 +9,10 @@ package com.app.afridge;
 
 public final class R {
     public static final class array {
+        public static final int measurementType=0x7f050003;
+        public static final int measurementTypeValues=0x7f050004;
         public static final int qtype=0x7f050001;
+        public static final int qtypeUS=0x7f050002;
         public static final int type=0x7f050000;
     }
     public static final class attr {
