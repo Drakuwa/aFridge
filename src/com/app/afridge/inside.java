@@ -90,12 +90,6 @@ public class inside extends Activity {
 		myDb.close();
 		super.onDestroy();
 	}
-	
-	@Override
-	protected void onPause() {
-		myDb.close();
-		super.onPause();
-	}
 
 	@Override
 	protected void onResume() {
