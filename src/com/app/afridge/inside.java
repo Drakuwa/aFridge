@@ -53,6 +53,7 @@ public class inside extends Activity {
 		int warning_days = Integer.parseInt(prefs
 				.getString("PREF_WARNING", "3"));
 		model = new Model(this, warning_days);
+		model.check_exp_date(true, true);
 
 		ia = new ImageAdapter(this);
 
@@ -341,7 +342,7 @@ public class inside extends Activity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case MENU_CHECK:
-			model.check_exp_date(true);
+			model.check_exp_date(true, false);
 			return true;
 
 		case MENU_SETTINGS:

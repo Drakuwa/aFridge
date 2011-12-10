@@ -33,7 +33,7 @@ public class main extends Activity {
 
 		boolean autocheck = prefs.getBoolean("PREF_EXP_DATE", false);
 		if (autocheck)
-			model.check_exp_date(false);
+			model.check_exp_date(false, false);
 
 		ImageView button1 = (ImageView) findViewById(R.id.button1);
 		button1.setOnClickListener(new OnClickListener() {

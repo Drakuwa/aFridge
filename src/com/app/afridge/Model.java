@@ -112,7 +112,7 @@ public class Model {
 	 * 
 	 * @param callFromFridge
 	 */
-	public void check_exp_date(boolean callFromFridge) {
+	public void check_exp_date(boolean callFromFridge, boolean itemColor) {
 
 		Calendar c = Calendar.getInstance();
 		mYear = c.get(Calendar.YEAR);
@@ -146,17 +146,20 @@ public class Model {
 						if (Integer.parseInt(exdate[2]) < mYear) {
 							passed_date.add(cc.getString(0) + ": "
 									+ cc.getString(1) + " " + cc.getString(2));
+							myDb.modifyItemExpData(cc.getString(0), "expired");
 							continue;
 						} else if (Integer.parseInt(exdate[2]) == mYear
 								&& Integer.parseInt(exdate[1]) < mMonth) {
 							passed_date.add(cc.getString(0) + ": "
 									+ cc.getString(1) + " " + cc.getString(2));
+							myDb.modifyItemExpData(cc.getString(0), "expired");
 							continue;
 						} else if (Integer.parseInt(exdate[2]) == mYear
 								&& Integer.parseInt(exdate[1]) == mMonth
 								&& Integer.parseInt(exdate[0]) < mDay) {
 							passed_date.add(cc.getString(0) + ": "
 									+ cc.getString(1) + " " + cc.getString(2));
+							myDb.modifyItemExpData(cc.getString(0), "expired");
 							continue;
 						} else if (Integer.parseInt(exdate[2]) == mYear
 								&& Integer.parseInt(exdate[1]) == mMonth
@@ -165,15 +168,16 @@ public class Model {
 									+ " day[s] left for " + cc.getString(0)
 									+ ": " + cc.getString(1) + " "
 									+ cc.getString(2));
+							myDb.modifyItemExpData(cc.getString(0), "warning");
 						}
 
 					}
 
 				} while (cc.moveToNext());
-				if (!passed_date.isEmpty()) {
+				if (!passed_date.isEmpty()&&!itemColor) {
 					passed_exp();
 				}
-				if (!warning_date.isEmpty()) {
+				if (!warning_date.isEmpty()&&!itemColor) {
 					warning_exp();
 				}
 				if (passed_date.isEmpty() && warning_date.isEmpty()

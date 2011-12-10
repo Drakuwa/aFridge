@@ -246,6 +246,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	/**
+	 * Updates the state of the expiration date of the item. Could be normal
+	 * (which is same as false), warning or expired
+	 * 
+	 * @param id
+	 * @param state
+	 * @return
+	 */
+	public boolean modifyItemExpData(String id, String state) {
+		ContentValues updateValues = new ContentValues();
+		updateValues.put(KEY_ISEMPTY, state);
+		return db.update(DATABASE_TABLE, updateValues, KEY_ROWID + "=" + id,
+				null) > 0;
+	}
+
+	/**
 	 * SQL query function that returns a cursor showing all the notes from the
 	 * database.
 	 * 
