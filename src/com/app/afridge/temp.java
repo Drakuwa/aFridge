@@ -10,7 +10,9 @@ import android.app.DatePickerDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.InputType;
 import android.view.View;
@@ -26,11 +28,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class temp extends ListActivity {
 
-	ListView lv;
+	private ListView lv;
 	private SimpleAdapter settings;
-	ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-	ArrayList<String> result = new ArrayList<String>();
-	ArrayList<String> item_to_modify = new ArrayList<String>();
+	private ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+	private ArrayList<String> result = new ArrayList<String>();
+	private ArrayList<String> item_to_modify = new ArrayList<String>();
 	private String name = "";
 	private String type = "";
 	private String quantity = "";
@@ -40,6 +42,8 @@ public class temp extends ListActivity {
 	private int mYear;
 	private int mMonth;
 	private int mDay;
+	private SharedPreferences prefs;
+	private String measureType;
 	private boolean isModifying = false;
 
 	@Override
@@ -52,6 +56,11 @@ public class temp extends ListActivity {
 					"item_to_modify"));
 			isModifying = true;
 		}
+
+		prefs = PreferenceManager
+				.getDefaultSharedPreferences(getApplicationContext());
+
+		measureType = prefs.getString("PREF_MEASURE", "metric");
 
 		if (!item_to_modify.isEmpty()) {
 			name = item_to_modify.get(0);
@@ -224,16 +233,30 @@ public class temp extends ListActivity {
 		alert.setTitle("Select type of measurement:");
 
 		final String[] items = getResources().getStringArray(R.array.qtype);
-		alert.setSingleChoiceItems(items, -1,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int item) {
+		final String[] itemsUS = getResources().getStringArray(R.array.qtypeUS);
 
-						qtype = items[item];
-						Toast.makeText(getApplicationContext(), items[item],
-								Toast.LENGTH_SHORT).show();
-						dialog.dismiss();
-					}
-				});
+		if (measureType.equalsIgnoreCase("metric"))
+			alert.setSingleChoiceItems(items, -1,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int item) {
+
+							qtype = items[item];
+							Toast.makeText(getApplicationContext(),
+									items[item], Toast.LENGTH_SHORT).show();
+							dialog.dismiss();
+						}
+					});
+		else
+			alert.setSingleChoiceItems(itemsUS, -1,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int item) {
+
+							qtype = itemsUS[item];
+							Toast.makeText(getApplicationContext(),
+									itemsUS[item], Toast.LENGTH_SHORT).show();
+							dialog.dismiss();
+						}
+					});
 		AlertDialog alert_ = alert.create();
 		alert_.show();
 	}
@@ -286,7 +309,7 @@ public class temp extends ListActivity {
 		};
 
 		DatePickerDialog dialog = new DatePickerDialog(this, mDateSetListener,
-				mYear, mMonth-1, mDay);
+				mYear, mMonth - 1, mDay);
 		dialog.show();
 	}
 }
