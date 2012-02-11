@@ -83,21 +83,9 @@ public class notes extends Activity {
 	}
 
 	@Override
-	protected void onPause() {
-		myDb.close();
-		super.onPause();
-	}
-
-	@Override
 	protected void onDestroy() {
 		myDb.close();
 		super.onDestroy();
-	}
-
-	@Override
-	protected void onStop() {
-		myDb.close();
-		super.onStop();
 	}
 
 	private void createClickAlert(final int position, final long itemid) {
