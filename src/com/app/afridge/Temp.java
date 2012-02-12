@@ -26,7 +26,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class temp extends ListActivity {
+public class Temp extends ListActivity {
 
 	private ListView lv;
 	private SimpleAdapter settings;

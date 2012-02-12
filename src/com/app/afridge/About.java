@@ -8,7 +8,7 @@ import android.os.Bundle;
  * @author drakuwa
  *
  */
-public class about extends Activity {
+public class About extends Activity {
 
 	/**
 	 * On create of the activity, show the about layout

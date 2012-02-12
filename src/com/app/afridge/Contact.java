@@ -15,7 +15,7 @@ import android.widget.ImageView;
  * @author drakuwa
  * 
  */
-public class contact extends Activity {
+public class Contact extends Activity {
 
 	// Initialization of the model.
 	Model model = new Model(this);

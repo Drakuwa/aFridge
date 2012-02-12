@@ -8,7 +8,7 @@ import android.os.Bundle;
  * @author drakuwa
  *
  */
-public class help extends Activity {
+public class Help extends Activity {
 
 	/**
 	 * On create of the activity, show the help layout

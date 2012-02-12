@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class inside extends Activity {
+public class Inside extends Activity {
 
 	private static final int ADD_ITEM = 1;
 	Model model;
@@ -270,13 +270,13 @@ public class inside extends Activity {
 
 	public void addItem(boolean modify) {
 		if (modify) {
-			Intent intentAddItem = new Intent(this, temp.class);
+			Intent intentAddItem = new Intent(this, Temp.class);
 			intentAddItem.putStringArrayListExtra("item_to_modify",
 					item_to_modify);
 			startActivityForResult(intentAddItem, ADD_ITEM);
 
 		} else {
-			Intent intentAddItem = new Intent(this, temp.class);
+			Intent intentAddItem = new Intent(this, Temp.class);
 			startActivityForResult(intentAddItem, ADD_ITEM);
 		}
 	}
@@ -357,7 +357,7 @@ public class inside extends Activity {
 			return true;
 
 		case MENU_SETTINGS:
-			Intent settingsActivity = new Intent(getBaseContext(), prefs.class);
+			Intent settingsActivity = new Intent(getBaseContext(), Prefs.class);
 			startActivity(settingsActivity);
 			return true;
 

@@ -9,7 +9,7 @@ import android.database.SQLException;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
-public class history extends ListActivity {
+public class History extends ListActivity {
 
 	ArrayList<String> tempArray = new ArrayList<String>();
 

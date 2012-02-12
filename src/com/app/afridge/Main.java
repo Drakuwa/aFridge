@@ -11,9 +11,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-public class main extends Activity {
+public class Main extends Activity {
 
 	private static final int MENU_SETTINGS = Menu.FIRST;
+	private static final int MENU_SHARE = MENU_SETTINGS + 1;
 	SharedPreferences prefs;
 	Model model;
 
@@ -38,7 +39,7 @@ public class main extends Activity {
 		ImageView button1 = (ImageView) findViewById(R.id.button1);
 		button1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent myIntent = new Intent(main.this, inside.class);
+				Intent myIntent = new Intent(Main.this, Inside.class);
 				startActivity(myIntent);
 			}
 		});
@@ -46,7 +47,7 @@ public class main extends Activity {
 		ImageView button2 = (ImageView) findViewById(R.id.button2);
 		button2.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent myIntent = new Intent(main.this, notes.class);
+				Intent myIntent = new Intent(Main.this, Notes.class);
 				startActivity(myIntent);
 			}
 		});
@@ -54,7 +55,7 @@ public class main extends Activity {
 		ImageView button3 = (ImageView) findViewById(R.id.button3);
 		button3.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent myIntent = new Intent(main.this, more.class);
+				Intent myIntent = new Intent(Main.this, More.class);
 				startActivity(myIntent);
 			}
 		});
@@ -64,6 +65,8 @@ public class main extends Activity {
 	public boolean onCreateOptionsMenu(final Menu pMenu) {
 		pMenu.add(0, MENU_SETTINGS, Menu.NONE, "Settings").setIcon(
 				android.R.drawable.ic_menu_preferences);
+		pMenu.add(0, MENU_SHARE, Menu.NONE, "Share").setIcon(
+				android.R.drawable.ic_menu_share);
 		return true;
 	}
 
@@ -71,8 +74,11 @@ public class main extends Activity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 		case MENU_SETTINGS:
-			Intent settingsActivity = new Intent(getBaseContext(), prefs.class);
+			Intent settingsActivity = new Intent(getBaseContext(), Prefs.class);
 			startActivity(settingsActivity);
+			return true;
+		case MENU_SHARE:
+			//
 			return true;
 		default:
 			return true;

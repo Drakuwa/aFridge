@@ -11,7 +11,7 @@ import android.os.Handler;
  * 
  * @author drakuwa
  */
-public class splash extends Activity {
+public class Splash extends Activity {
 
 	protected boolean _active = true;
 	protected int _splashTime = 2000;
@@ -29,7 +29,7 @@ public class splash extends Activity {
 		 */
 		new Handler().postDelayed(new Runnable() {
 			public void run() {
-				Intent novIntent = new Intent(splash.this, main.class);
+				Intent novIntent = new Intent(Splash.this, Main.class);
 				startActivity(novIntent);
 				finish();
 

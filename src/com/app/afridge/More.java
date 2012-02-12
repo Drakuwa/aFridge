@@ -12,7 +12,7 @@ import android.widget.TabHost;
  * @author drakuwa
  * 
  */
-public class more extends TabActivity {
+public class More extends TabActivity {
 
 	/**
 	 * An override of the onCreate method that initializes the tab objects
@@ -28,19 +28,19 @@ public class more extends TabActivity {
 		Intent intent; // Reusable Intent for each tab
 
 		// Create an Intent to launch an Activity for the tab (to be reused)
-		intent = new Intent().setClass(this, about.class);
+		intent = new Intent().setClass(this, About.class);
 
 		// Initialize a TabSpec for each tab and add it to the TabHost
 		spec = tabHost.newTabSpec("about").setIndicator("About",
 				res.getDrawable(R.drawable.ic_tab_about)).setContent(intent);
 		tabHost.addTab(spec);
 
-		intent = new Intent().setClass(this, help.class);
+		intent = new Intent().setClass(this, Help.class);
 		spec = tabHost.newTabSpec("help").setIndicator("Help",
 				res.getDrawable(R.drawable.ic_tab_help)).setContent(intent);
 		tabHost.addTab(spec);
 
-		intent = new Intent().setClass(this, contact.class);
+		intent = new Intent().setClass(this, Contact.class);
 		spec = tabHost.newTabSpec("contact").setIndicator("Contact",
 				res.getDrawable(R.drawable.ic_tab_contact)).setContent(intent);
 		tabHost.addTab(spec);

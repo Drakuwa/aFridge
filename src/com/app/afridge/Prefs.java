@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class prefs extends PreferenceActivity {
+public class Prefs extends PreferenceActivity {
 
 	SharedPreferences prefs;
 	Model model = new Model(this);
@@ -34,7 +34,7 @@ public class prefs extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 					public boolean onPreferenceClick(Preference preference) {
-						Intent novIntent = new Intent(prefs.this, history.class);
+						Intent novIntent = new Intent(Prefs.this, History.class);
 						startActivity(novIntent);
 						return true;
 					}

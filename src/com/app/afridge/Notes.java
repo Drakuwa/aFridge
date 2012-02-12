@@ -20,7 +20,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class notes extends Activity {
+public class Notes extends Activity {
 
 	/** Called when the activity is first created. */
 	private static final int MENU_CLEAR = Menu.FIRST;
