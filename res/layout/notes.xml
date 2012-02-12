@@ -16,7 +16,7 @@
         android:layout_marginBottom="5dip"
         android:layout_marginLeft="10dip"
         android:hint="Enter shopping list item..."
-        android:ellipsize="marquee"
+        android:ellipsize="start"
     	/>
     <Button 
     	android:id="@+id/notes_button"

@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import com.facebook.android.*;
+import com.facebook.android.Facebook.*;
+
 public class Main extends Activity {
 
 	private static final int MENU_SETTINGS = Menu.FIRST;
 	private static final int MENU_SHARE = MENU_SETTINGS + 1;
 	SharedPreferences prefs;
 	Model model;
+	Facebook facebook = new Facebook("368710909825016");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +83,29 @@ public class Main extends Activity {
 			return true;
 		case MENU_SHARE:
 			//
+			facebook.authorize(this, new DialogListener() {
+				public void onComplete(Bundle values) {
+				}
+
+				public void onFacebookError(FacebookError error) {
+				}
+
+				public void onError(DialogError e) {
+				}
+
+				public void onCancel() {
+				}
+			});
 			return true;
 		default:
 			return true;
 		}
 	}
+	
+	@Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        facebook.authorizeCallback(requestCode, resultCode, data);
+    }
 }
