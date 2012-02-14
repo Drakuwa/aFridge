@@ -50,6 +50,7 @@ public class Main extends Activity {
 	private static final int MENU_SHARE = MENU_SETTINGS + 1;
 	private String facebookId = "";
 	private String lastTimestamp = "";
+	private String realName = "";
 	private DatabaseHelper myDb;
 	private boolean eraseFirst = false;
 	SharedPreferences prefs;
@@ -74,6 +75,9 @@ public class Main extends Activity {
 
 		lastTimestamp = prefs.getString("last_timestamp", "");
 		Log.d("xxx", "last Timestamp: " + lastTimestamp);
+		
+		realName = prefs.getString("real_name", "");
+		Log.d("xxx", "real name: " + realName);
 
 		model = new Model(this, warning_days);
 		model.first_run();
@@ -192,11 +196,13 @@ public class Main extends Activity {
 						facebook.logout(Main.this);
 						facebookId = "";
 						lastTimestamp = "";
+						realName = "";
 						SharedPreferences.Editor editor2 = prefs.edit();
 						editor2.putString("access_token", null);
 						editor2.putLong("expires", 0);
 						editor2.putString("facebook_id", facebookId);
 						editor2.putString("last_timestamp", "");
+						editor2.putString("real_name", "");
 						editor2.commit();
 					} catch (MalformedURLException e) {
 						e.printStackTrace();
@@ -337,13 +343,15 @@ public class Main extends Activity {
 								JSONObject jArray = null;
 								jArray = new JSONObject(response);
 								String id = jArray.get("id").toString();
+								realName = jArray.get("name").toString();
 
 								SharedPreferences.Editor editor2 = prefs.edit();
 								editor2.putString("facebook_id", id);
+								editor2.putString("real_name", realName);
 								editor2.commit();
 
 								Log.d("xxx",
-										"Na kraj od se izvadeno samo id-to: "
+										" Na kraj od se izvadeno samo id-to: "
 												+ id);
 								facebookId = id;
 							} catch (MalformedURLException e) {
@@ -367,7 +375,7 @@ public class Main extends Activity {
 		} else {
 			if (facebookId.length() > 0) {
 				Toast.makeText(getApplicationContext(),
-						"You're already connected to Facebook",
+						"You're already connected to Facebook as: "+realName,
 						Toast.LENGTH_SHORT).show();
 			} else {
 				try {
@@ -375,9 +383,11 @@ public class Main extends Activity {
 					JSONObject jArray = null;
 					jArray = new JSONObject(response);
 					String id = jArray.get("id").toString();
+					realName = jArray.get("name").toString();
 
 					SharedPreferences.Editor editor2 = prefs.edit();
 					editor2.putString("facebook_id", id);
+					editor2.putString("real_name", realName);
 					editor2.commit();
 
 					Log.d("xxx", "Na kraj od se izvadeno samo id-to: " + id);
