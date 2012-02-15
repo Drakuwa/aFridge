@@ -85,6 +85,7 @@ public class Notes extends Activity {
 	@Override
 	protected void onDestroy() {
 		myDb.close();
+		c.close();
 		super.onDestroy();
 	}
 
