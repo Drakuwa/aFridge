@@ -39,6 +39,11 @@ public class More extends TabActivity {
 		spec = tabHost.newTabSpec("help").setIndicator("Help",
 				res.getDrawable(R.drawable.ic_tab_help)).setContent(intent);
 		tabHost.addTab(spec);
+		
+		intent = new Intent().setClass(this, FBinfo.class);
+		spec = tabHost.newTabSpec("facebook").setIndicator("Facebook", 
+				res.getDrawable(R.drawable.ic_tab_facebook)).setContent(intent);
+		tabHost.addTab(spec);
 
 		intent = new Intent().setClass(this, Contact.class);
 		spec = tabHost.newTabSpec("contact").setIndicator("Contact",
