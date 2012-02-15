@@ -9,4 +9,7 @@
     <string name="help3">- Build a virtual shopping list in the \'Fridge Notes\' section. Just click on the empty text field, write a note and click the add button. Click on a note if you want to delete it, or click the menu button to get the option for deleting all the notes.</string>
     <string name="help4">- Click the menu button on the main screen to access the settings of the application where you can allow automatic expiration date check on every startup, set the minimum number of days for exp. date warning, and see/clear the history of usage.</string>
     <string name="contact">For questions, complains or compliments, contact me on my Twitter, Facebook, or Google+ page, or send me an E-mail.</string>
+    <string name="fb1">aFridge has a Facebook application for sharing notes, that you can access directly on https://apps.facebook.com/android_fridge or via aFridge\'s Share functionality.</string>
+    <string name="fb2">On the main menu, click the MENU button and choose Share. From there, you can connect to your Facebook account, write on your FB wall, access the FB app, and retrieve the online notes sent to you.</string>
+    <string name="fbnote">To send a note, you need to use the users Facebook UID, which is included in the app\'s auto-complete option. Write the name of your FB friend (case sensitive), and click on it in the suggestion box. For more information, go to the FB app fan page on (coming soon).</string>
 </resources>
