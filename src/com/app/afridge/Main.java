@@ -170,7 +170,11 @@ public class Main extends Activity {
 		final Dialog dialog = new Dialog(this);
 
 		dialog.setContentView(R.layout.share);
-		dialog.setTitle("aFridge");
+		if(realName.length()>0){
+			dialog.setTitle(realName);
+		}
+		else dialog.setTitle("aFridge");
+		
 
 		Button connect = (Button) dialog.findViewById(R.id.connectbtn);
 		Button logout = (Button) dialog.findViewById(R.id.logoutbtn);
