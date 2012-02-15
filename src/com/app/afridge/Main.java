@@ -29,6 +29,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable.Creator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -37,6 +38,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.android.DialogError;
@@ -75,7 +77,7 @@ public class Main extends Activity {
 
 		lastTimestamp = prefs.getString("last_timestamp", "");
 		Log.d("xxx", "last Timestamp: " + lastTimestamp);
-		
+
 		realName = prefs.getString("real_name", "");
 		Log.d("xxx", "real name: " + realName);
 
@@ -174,6 +176,28 @@ public class Main extends Activity {
 		Button logout = (Button) dialog.findViewById(R.id.logoutbtn);
 		Button share = (Button) dialog.findViewById(R.id.sharebtn);
 		Button getnotes = (Button) dialog.findViewById(R.id.getnotesbtn);
+		Button gotoapp = (Button) dialog.findViewById(R.id.gotobtn);
+		
+		TextView tconnect = (TextView) dialog.findViewById(R.id.connecttxt);
+		TextView tlogout = (TextView) dialog.findViewById(R.id.logouttxt);
+		TextView tshare = (TextView) dialog.findViewById(R.id.sharetxt);
+		TextView tgetnotes = (TextView) dialog.findViewById(R.id.getnotestxt);
+		TextView tgotoapp = (TextView) dialog.findViewById(R.id.gototxt);
+		
+		if (facebookId.length() > 0){
+			connect.setVisibility(View.GONE);
+			tconnect.setVisibility(View.GONE);
+		}
+		else {
+			logout.setVisibility(View.GONE);
+			share.setVisibility(View.GONE);
+			getnotes.setVisibility(View.GONE);
+			gotoapp.setVisibility(View.GONE);
+			tlogout.setVisibility(View.GONE);
+			tshare.setVisibility(View.GONE);
+			tgetnotes.setVisibility(View.GONE);
+			tgotoapp.setVisibility(View.GONE);
+		}
 
 		connect.setOnClickListener(new OnClickListener() {
 
@@ -190,86 +214,107 @@ public class Main extends Activity {
 		logout.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-
-				if (facebook.isSessionValid()) {
-					try {
-						facebook.logout(Main.this);
-						facebookId = "";
-						lastTimestamp = "";
-						realName = "";
-						SharedPreferences.Editor editor2 = prefs.edit();
-						editor2.putString("access_token", null);
-						editor2.putLong("expires", 0);
-						editor2.putString("facebook_id", facebookId);
-						editor2.putString("last_timestamp", "");
-						editor2.putString("real_name", "");
-						editor2.commit();
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (HaveNetworkConnection()) {
+					if (facebook.isSessionValid()) {
+						try {
+							facebook.logout(Main.this);
+							facebookId = "";
+							lastTimestamp = "";
+							realName = "";
+							SharedPreferences.Editor editor2 = prefs.edit();
+							editor2.putString("access_token", null);
+							editor2.putLong("expires", 0);
+							editor2.putString("facebook_id", facebookId);
+							editor2.putString("last_timestamp", "");
+							editor2.putString("real_name", "");
+							editor2.commit();
+						} catch (MalformedURLException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						dialog.dismiss();
+					} else {
+						Toast.makeText(getApplicationContext(),
+								"You are not connected to Facebook!",
+								Toast.LENGTH_SHORT).show();
+						dialog.dismiss();
 					}
-					dialog.dismiss();
-				} else {
-					Toast.makeText(getApplicationContext(),
-							"You are not connected to Facebook!",
-							Toast.LENGTH_SHORT).show();
-					dialog.dismiss();
-				}
+				} else
+					createInternetDisabledAlert();
 			}
 		});
 
 		share.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				if (HaveNetworkConnection()) {
+					if (facebook.isSessionValid()) {
+						// post on user's wall.
+						facebook.dialog(Main.this, "feed",
+								new DialogListener() {
 
-				if (facebook.isSessionValid()) {
-					// post on user's wall.
-					facebook.dialog(Main.this, "feed", new DialogListener() {
+									public void onFacebookError(FacebookError e) {
+										Toast.makeText(getApplicationContext(),
+												e.getMessage().toString(),
+												Toast.LENGTH_SHORT).show();
+										dialog.dismiss();
+									}
 
-						public void onFacebookError(FacebookError e) {
-							Toast.makeText(getApplicationContext(),
-									e.getMessage().toString(),
-									Toast.LENGTH_SHORT).show();
-							dialog.dismiss();
-						}
+									public void onError(DialogError e) {
+										Toast.makeText(getApplicationContext(),
+												e.getMessage().toString(),
+												Toast.LENGTH_SHORT).show();
+										dialog.dismiss();
+									}
 
-						public void onError(DialogError e) {
-							Toast.makeText(getApplicationContext(),
-									e.getMessage().toString(),
-									Toast.LENGTH_SHORT).show();
-							dialog.dismiss();
-						}
+									public void onComplete(Bundle values) {
+										dialog.dismiss();
+									}
 
-						public void onComplete(Bundle values) {
-							dialog.dismiss();
-						}
-
-						public void onCancel() {
-							dialog.dismiss();
-						}
-					});
-				} else {
-					Toast.makeText(getApplicationContext(),
-							"You have to connect to Facebook first!",
-							Toast.LENGTH_SHORT).show();
-					dialog.dismiss();
-				}
+									public void onCancel() {
+										dialog.dismiss();
+									}
+								});
+					} else {
+						Toast.makeText(getApplicationContext(),
+								"You have to connect to Facebook first!",
+								Toast.LENGTH_SHORT).show();
+						dialog.dismiss();
+					}
+				} else
+					createInternetDisabledAlert();
 			}
 		});
 
 		getnotes.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				if (facebookId.length() > 0) {
-					new GetNotes().execute();
+				if (HaveNetworkConnection()) {
+					if (facebookId.length() > 0) {
+						new GetNotes().execute();
+						dialog.dismiss();
+					} else {
+						Toast.makeText(
+								getApplicationContext(),
+								"You have to connect to the Facebook application first",
+								Toast.LENGTH_SHORT).show();
+						dialog.dismiss();
+					}
+				} else
+					createInternetDisabledAlert();
+			}
+		});
+
+		gotoapp.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				if (HaveNetworkConnection()) {
+					Intent myIntent = new Intent(Main.this, FBapp.class);
+					startActivity(myIntent);
 					dialog.dismiss();
 				} else {
-					Toast.makeText(
-							getApplicationContext(),
-							"You have to connect to the Facebook application first",
-							Toast.LENGTH_SHORT).show();
-					dialog.dismiss();
+					createInternetDisabledAlert();
 				}
 			}
 		});
@@ -375,7 +420,7 @@ public class Main extends Activity {
 		} else {
 			if (facebookId.length() > 0) {
 				Toast.makeText(getApplicationContext(),
-						"You're already connected to Facebook as: "+realName,
+						"You're already connected to Facebook as: " + realName,
 						Toast.LENGTH_SHORT).show();
 			} else {
 				try {
@@ -495,7 +540,7 @@ public class Main extends Activity {
 					SharedPreferences.Editor editor2 = prefs.edit();
 					editor2.putString("last_timestamp", lastTimestamp);
 					editor2.commit();
-					
+
 					if (eraseFirst && i == 0) {
 						continue;
 					} else {
