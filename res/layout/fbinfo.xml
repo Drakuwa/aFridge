@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ImageView
+            android:id="@+id/about_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dip"
+            android:paddingLeft="10dip"
+            android:paddingTop="10dip"
+            android:src="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/appname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/about_icon"
+            android:paddingBottom="20dip"
+            android:paddingLeft="2dip"
+            android:paddingRight="10dip"
+            android:paddingTop="15dip"
+            android:text="@string/app_name"
+            android:textColor="#101010"
+            android:textSize="28dip"
+            android:typeface="serif" />
+
+        <LinearLayout
+            android:id="@+id/app_fb_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appname"
+            android:layout_weight="0.75"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#eef7ff"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"
+                    android:paddingTop="15dip"
+                    android:text="@string/fb1"
+                    android:textColor="#061015"
+                    android:textSize="17dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"
+                    android:paddingTop="7dip"
+                    android:text="@string/fb2"
+                    android:textColor="#061015"
+                    android:textSize="17dip" >
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/app_fb_txt_2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_fb_txt"
+            android:layout_weight="0.80"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dip" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#eef7ff"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/app_fbnote_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dip"
+                    android:paddingLeft="7dip"
+                    android:paddingRight="7dip"
+                    android:paddingTop="10dip"
+                    android:text="@string/fbnote"
+                    android:textColor="#10203f"
+                    android:textSize="16dp" >
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>
