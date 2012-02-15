@@ -1,43 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/background" >
 
-    <Button
-        android:id="@+id/connectbtn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:text="Connect" />
-    
-    <Button
-        android:id="@+id/logoutbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:text="Logout" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/sharebtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:text="Share" />
+        <ImageView
+            android:id="@+id/fbimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="15dip"
+            android:src="@drawable/facebook_connect" />
 
-    <Button
-        android:id="@+id/getnotesbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:text="Get Notes" />
+        <TextView
+            android:id="@+id/connecttxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="15dip"
+            android:text="Connect to your Facebook account:"
+            android:textColor="#101010"
+            android:textSize="16dip" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/connectbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="5dip"
+            android:text="Connect" />
+
+        <TextView
+            android:id="@+id/gototxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="15dip"
+            android:text="Go to the Facebook Application:"
+            android:textColor="#101010"
+            android:textSize="16dip" />
+
+        <Button
+            android:id="@+id/gotobtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="5dip"
+            android:text="Go to App" />
+
+        <TextView
+            android:id="@+id/getnotestxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="15dip"
+            android:text="Fetch new notes:"
+            android:textColor="#101010"
+            android:textSize="16dip" />
+
+        <Button
+            android:id="@+id/getnotesbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="5dip"
+            android:text="Get Notes" />
+
+        <TextView
+            android:id="@+id/sharetxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="15dip"
+            android:text="Write something on your Wall:"
+            android:textColor="#101010"
+            android:textSize="16dip" />
+
+        <Button
+            android:id="@+id/sharebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="5dip"
+            android:text="Share on Wall" />
+
+        <TextView
+            android:id="@+id/logouttxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="15dip"
+            android:text="Logout of your Facebook account:"
+            android:textColor="#101010"
+            android:textSize="16dip" />
+
+        <Button
+            android:id="@+id/logoutbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dip"
+            android:layout_marginRight="25dip"
+            android:layout_marginTop="5dip"
+            android:text="Logout" />
+    </LinearLayout>
+
+</ScrollView>
