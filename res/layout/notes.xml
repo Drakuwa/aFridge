@@ -9,6 +9,7 @@
   	<EditText 
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content"
+    	android:ems="12"
     	android:id="@+id/editTextNotes" 
     	android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -16,7 +17,7 @@
         android:layout_marginBottom="5dip"
         android:layout_marginLeft="10dip"
         android:hint="Enter shopping list item..."
-        android:ellipsize="start"
+        android:ellipsize="end"
     	/>
     <Button 
     	android:id="@+id/notes_button"
