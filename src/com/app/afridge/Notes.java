@@ -13,12 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class Notes extends Activity {
 
@@ -59,8 +58,7 @@ public class Notes extends Activity {
 					next_id = c.getInt(0) + 1;
 				}
 
-				boolean addnote = myDb
-						.addNote(value, Integer.toString(next_id));
+				myDb.addNote(value, Integer.toString(next_id));
 				init_db();
 				cadapter.changeCursor(c);
 				cadapter.notifyDataSetChanged();
@@ -98,7 +96,7 @@ public class Notes extends Activity {
 				false).setPositiveButton("Yes",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						boolean delete = myDb.deleteNote(Long.toString(itemid));
+						myDb.deleteNote(Long.toString(itemid));
 						init_db();
 						cadapter.changeCursor(c);
 						cadapter.notifyDataSetChanged();
@@ -147,7 +145,7 @@ public class Notes extends Activity {
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
             switch(item.getItemId()) {
                     case MENU_CLEAR:
-                    	boolean clear = myDb.deleteAllNotes();
+                    	myDb.deleteAllNotes();
                     	init_db();
 						cadapter.changeCursor(c);
 						cadapter.notifyDataSetChanged();

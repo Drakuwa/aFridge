@@ -29,7 +29,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable.Creator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -548,7 +547,7 @@ public class Main extends Activity {
 					if (eraseFirst && i == 0) {
 						continue;
 					} else {
-						boolean addnote = myDb.addNote(
+						myDb.addNote(
 								jsonObject.getString("value"),
 								Integer.toString(next_id));
 					}

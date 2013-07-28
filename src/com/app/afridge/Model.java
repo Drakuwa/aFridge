@@ -77,9 +77,8 @@ public class Model {
 	 * creates the file.
 	 */
 	public void first_run() {
-		boolean exists = (new File("/data/data/com.app.afridge/notwelcomefirst"))
+		boolean exists = (new File(ctx.getFilesDir().getPath(),"notwelcomefirst"))
 				.exists();
-
 		if (!exists) {
 			// Welcome note...
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -88,7 +87,7 @@ public class Model {
 							+ "for more information and a quick HOWTO, "
 							+ "check the 'Info' section. ").setIcon(
 					R.drawable.icon).setTitle(R.string.app_name).setCancelable(
-					false).setPositiveButton("OK..",
+					false).setPositiveButton("OK",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
 						}
@@ -96,7 +95,7 @@ public class Model {
 			AlertDialog alert = builder.create();
 			alert.show();
 			try {
-				new File("/data/data/com.app.afridge/notwelcomefirst")
+				new File(ctx.getFilesDir().getPath(),"notwelcomefirst")
 						.createNewFile();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -284,7 +283,7 @@ public class Model {
 				.setCancelable(true).setPositiveButton("Yes",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								boolean clear = myDb.clearHistory();
+								myDb.clearHistory();
 								Toast.makeText(ctx, "History cleared!",
 										Toast.LENGTH_LONG).show();
 								myDb.close();

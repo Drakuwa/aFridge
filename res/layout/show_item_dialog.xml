@@ -28,9 +28,9 @@
         android:layout_margin="5dip"
         android:layout_toRightOf="@id/image"
         android:textColor="#FFF"
-        android:textSize="18dip"
+        android:textSize="18sp"
         android:textStyle="bold" />
-    
+
     <TextView
         android:id="@+id/textState"
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_marginLeft="5dip"
         android:layout_toRightOf="@id/image"
         android:textColor="#FFF"
-        android:textSize="15dip"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <View
@@ -106,22 +106,31 @@
         android:layout_below="@id/text_exp"
         android:background="#FF909090" />
 
-    <Button
-        android:id="@+id/change"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/splitter3"
-        android:layout_centerInParent="true"
-        android:layout_margin="5dip"
-        android:text="Change" />
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/splitter3"
-        android:layout_margin="5dip"
-        android:layout_toRightOf="@id/change"
-        android:text="Delete" />
+        <Button
+            android:id="@+id/change"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_weight="1"
+            android:background="@drawable/black_button_gradient"
+            android:text="Change" />
+
+        <Button
+            android:id="@+id/delete"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_weight="1"
+            android:background="@drawable/red_button_gradient"
+            android:text="Delete" />
+    </LinearLayout>
 
 </RelativeLayout>

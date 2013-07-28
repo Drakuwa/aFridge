@@ -31,6 +31,8 @@
 
         <Button
             android:id="@+id/connectbtn"
+            android:background="@drawable/black_button_gradient"
+            style="@style/ButtonText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dip"
@@ -50,6 +52,8 @@
             android:textSize="16dip" />
 
         <Button
+            android:background="@drawable/black_button_gradient"
+            style="@style/ButtonText"
             android:id="@+id/gotobtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,6 +74,8 @@
             android:textSize="16dip" />
 
         <Button
+            android:background="@drawable/black_button_gradient"
+            style="@style/ButtonText"
             android:id="@+id/getnotesbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,6 +96,8 @@
             android:textSize="16dip" />
 
         <Button
+            android:background="@drawable/black_button_gradient"
+            style="@style/ButtonText"
             android:id="@+id/sharebtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,6 +118,8 @@
             android:textSize="16dip" />
 
         <Button
+            android:background="@drawable/black_button_gradient"
+            style="@style/ButtonText"
             android:id="@+id/logoutbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -20,11 +20,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class Inside extends Activity {
 
@@ -235,10 +235,9 @@ public class Inside extends Activity {
 				history_item.add(c.getString(7));
 				history_item.add("Deleted");
 
-				boolean addToHistory = myDb.addToHistory(Integer
+				myDb.addToHistory(Integer
 						.toString(next_id), history_item);
-
-				boolean modify = myDb.modifyItem(item);
+				myDb.modifyItem(item);
 				ia.refresh();
 				dialog.dismiss();
 			}
@@ -292,7 +291,7 @@ public class Inside extends Activity {
 				item.add(0, Integer.toString(temp));
 				item.addAll(data.getStringArrayListExtra("Item"));
 				
-				boolean modify = myDb.modifyItem(item);
+				myDb.modifyItem(item);
 				model.check_exp_date(true, true);
 				ia.refresh();
 
@@ -333,8 +332,7 @@ public class Inside extends Activity {
 					history_item.add("Modified");
 				} else
 					history_item.add("Added");
-				boolean addToHistory = myDb.addToHistory(Integer
-						.toString(next_id), history_item);
+				myDb.addToHistory(Integer.toString(next_id), history_item);
 			}
 	}
 

@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@drawable/notes">
-  
-  	<EditText 
-    	android:layout_height="wrap_content" 
-    	android:layout_width="wrap_content"
-    	android:ems="12"
-    	android:id="@+id/editTextNotes" 
-    	android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="30dip"
-        android:layout_marginBottom="5dip"
-        android:layout_marginLeft="10dip"
-        android:hint="Enter shopping list item..."
-        android:ellipsize="end"
-    	/>
-    <Button 
-    	android:id="@+id/notes_button"
-    	android:layout_height="wrap_content" 
-    	android:layout_width="wrap_content"
-    	android:text="Add"
-    	android:layout_marginTop="30dip"
-    	android:layout_toRightOf="@id/editTextNotes"
-    	/>
-    <ListView 
-    	android:id="@+id/listViewNotes" 
-    	android:layout_height="wrap_content" 
-    	android:layout_width="fill_parent"
-    	android:layout_below="@id/editTextNotes"
-    	android:layout_marginLeft="40dip"
-    	android:cacheColorHint="#00000000"
-    	/>
-    
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/notes"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/editTextNotesHolder"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="30dp" >
+
+        <EditText
+            android:id="@+id/editTextNotes"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:ems="12"
+            android:hint="Enter shopping list item..."
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/notes_button"
+            style="@style/ButtonText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/black_button_gradient"
+            android:text="Add" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listViewNotes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextNotesHolder"
+        android:layout_marginLeft="40dip"
+        android:cacheColorHint="#00000000" />
+
 </RelativeLayout>
