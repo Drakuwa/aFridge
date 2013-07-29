@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/milk"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_milk"
+                android:text="Milk" />
+
+            <TextView
+                android:id="@+id/cheese"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_cheese"
+                android:text="Cheese" />
+
+            <TextView
+                android:id="@+id/eggs"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_eggs"
+                android:text="Eggs" />
+
+            <TextView
+                android:id="@+id/butter"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_butter"
+                android:text="Butter" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/ham"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_ham"
+                android:text="Ham" />
+
+            <TextView
+                android:id="@+id/sausage"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_sausage"
+                android:text="Sausage" />
+
+            <TextView
+                android:id="@+id/fish"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_fish"
+                android:text="Fish" />
+
+            <TextView
+                android:id="@+id/meat"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_meat"
+                android:text="Meat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/mayo"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_mayo"
+                android:text="Mayonnaise" />
+
+            <TextView
+                android:id="@+id/ketchup"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_ketchup"
+                android:text="Ketchup" />
+
+            <TextView
+                android:id="@+id/mustard"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_mustard"
+                android:text="Mustard" />
+
+            <TextView
+                android:id="@+id/leftover"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_leftover"
+                android:text="Leftovers" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/fruit"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_fruit"
+                android:text="Fruit" />
+
+            <TextView
+                android:id="@+id/veggie"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_veggie"
+                android:text="Vegetables" />
+
+            <TextView
+                android:id="@+id/pickles"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_pickles"
+                android:text="Pickles" />
+
+            <TextView
+                android:id="@+id/cake"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_cake"
+                android:text="Cake" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/cream"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_cream"
+                android:text="Cream" />
+
+            <TextView
+                android:id="@+id/jam"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_jam"
+                android:text="Jam" />
+            
+            <TextView
+                android:id="@+id/drinks"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_drinks"
+                android:text="Drinks" />
+
+            <TextView
+                android:id="@+id/other"
+                style="@style/AddItem"
+                android:drawableTop="@drawable/item_other"
+                android:text="Other" />
+
+            
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

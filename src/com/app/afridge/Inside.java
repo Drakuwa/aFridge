@@ -14,7 +14,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -254,7 +253,8 @@ public class Inside extends Activity {
 				false).setPositiveButton("Yes",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						addItem(false);
+						//addItem(false);
+						chooseItem();
 					}
 				});
 		builder.setNegativeButton("Cancel",
@@ -279,6 +279,178 @@ public class Inside extends Activity {
 			startActivityForResult(intentAddItem, ADD_ITEM);
 		}
 	}
+	
+	public void chooseItem(){
+		final Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.add_item);
+		dialog.setTitle("Choose an item");
+		
+		final TextView milk = (TextView)dialog.findViewById(R.id.milk);
+		milk.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(milk.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView cheese = (TextView)dialog.findViewById(R.id.cheese);
+		cheese.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(cheese.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView eggs = (TextView)dialog.findViewById(R.id.eggs);
+		eggs.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(eggs.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView butter = (TextView)dialog.findViewById(R.id.butter);
+		butter.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(butter.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView ham = (TextView)dialog.findViewById(R.id.ham);
+		ham.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(ham.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView sausage = (TextView)dialog.findViewById(R.id.sausage);
+		sausage.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(sausage.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView fish = (TextView)dialog.findViewById(R.id.fish);
+		fish.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(fish.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView meat = (TextView)dialog.findViewById(R.id.meat);
+		meat.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(meat.getText().toString());
+			dialog.dismiss();
+		}});
+		final TextView mayo = (TextView)dialog.findViewById(R.id.mayo);
+		mayo.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(mayo.getText().toString());
+			dialog.dismiss();}});
+		final TextView ketchup = (TextView)dialog.findViewById(R.id.ketchup);
+		ketchup.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(ketchup.getText().toString());
+			dialog.dismiss();}});
+		final TextView mustard = (TextView)dialog.findViewById(R.id.mustard);
+		mustard.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(mustard.getText().toString());
+			dialog.dismiss();}});
+		final TextView left = (TextView)dialog.findViewById(R.id.leftover);
+		left.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(left.getText().toString());
+			dialog.dismiss();}});
+		final TextView fruit = (TextView)dialog.findViewById(R.id.fruit);
+		fruit.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(fruit.getText().toString());
+			dialog.dismiss();}});
+		final TextView vege = (TextView)dialog.findViewById(R.id.veggie);
+		vege.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(vege.getText().toString());
+			dialog.dismiss();}});
+		final TextView pickle = (TextView)dialog.findViewById(R.id.pickles);
+		pickle.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(pickle.getText().toString());
+			dialog.dismiss();}});
+		final TextView cake = (TextView)dialog.findViewById(R.id.cake);
+		cake.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(cake.getText().toString());
+			dialog.dismiss();}});
+		final TextView cream = (TextView)dialog.findViewById(R.id.cream);
+		cream.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(cream.getText().toString());
+			dialog.dismiss();}});
+		final TextView jam = (TextView)dialog.findViewById(R.id.jam);
+		jam.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(jam.getText().toString());
+			dialog.dismiss();}});
+		final TextView drinks = (TextView)dialog.findViewById(R.id.drinks);
+		drinks.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(drinks.getText().toString());
+			dialog.dismiss();}});
+		final TextView other = (TextView)dialog.findViewById(R.id.other);
+		other.setOnClickListener(new OnClickListener() {@Override
+			public void onClick(View arg0) {
+			createItem(other.getText().toString());
+			dialog.dismiss();}});
+		
+		dialog.show();
+	}
+	
+	private void createItem(String type){
+		ArrayList<String> result = new ArrayList<String>();
+		result.add("");
+		result.add(type);
+		result.add("");
+		result.add("");
+		result.add("");
+		result.add("false");
+		result.add("");
+		Intent resultIntent = new Intent();
+		resultIntent.putStringArrayListExtra("Item", result);
+		saveToDatabase(resultIntent);
+	}
+	
+	private void saveToDatabase(Intent data){
+		item.clear();
+		item.add(0, Integer.toString(temp));
+		item.addAll(data.getStringArrayListExtra("Item"));
+		
+		myDb.modifyItem(item);
+		model.check_exp_date(true, true);
+		ia.refresh();
+
+		// Here we add the new/modified item to the history table...
+		history_item.clear();
+		int next_id;
+		Cursor c = myDb.getHistory();
+		if (c.getCount() == 0) {next_id = 0;} 
+		else {c.moveToLast();next_id = c.getInt(0) + 1;}
+
+		Calendar cal = Calendar.getInstance();
+		int mYear = cal.get(Calendar.YEAR);
+		int mMonth = cal.get(Calendar.MONTH) + 1;
+		int mDay = cal.get(Calendar.DAY_OF_MONTH);
+		int mHour = cal.get(Calendar.HOUR_OF_DAY);
+		int mMinute = cal.get(Calendar.MINUTE);
+
+		history_item.add(mHour + ":" + mMinute + " " + mDay + "-"+ mMonth + "-" + mYear);
+		history_item.add("position:" + Integer.toString(temp));
+		tempArray.clear();
+		tempArray.addAll(data.getStringArrayListExtra("Item"));
+
+		history_item.add(tempArray.get(0));
+		history_item.add(tempArray.get(1));
+		history_item.add(tempArray.get(2));
+		history_item.add(tempArray.get(3));
+		history_item.add(tempArray.get(4));
+		history_item.add(tempArray.get(6));
+
+		if (data.getBooleanExtra("isModified", false)) {
+			history_item.add("Modified");
+		} else history_item.add("Added");
+		myDb.addToHistory(Integer.toString(next_id), history_item);
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -286,53 +458,7 @@ public class Inside extends Activity {
 
 		if (requestCode == ADD_ITEM)
 			if (resultCode == RESULT_OK) {
-				Log.d("xxx", "Vlezeno e vo if-ot");
-				item.clear();
-				item.add(0, Integer.toString(temp));
-				item.addAll(data.getStringArrayListExtra("Item"));
-				
-				myDb.modifyItem(item);
-				model.check_exp_date(true, true);
-				ia.refresh();
-
-				// Here we add the new/modified item to the history table...
-				history_item.clear();
-				int next_id;
-				Cursor c = myDb.getHistory();
-				if (c.getCount() == 0) {
-					next_id = 0;
-				} else {
-					c.moveToLast();
-					next_id = c.getInt(0) + 1;
-				}
-
-				Calendar cal = Calendar.getInstance();
-
-				int mYear = cal.get(Calendar.YEAR);
-				int mMonth = cal.get(Calendar.MONTH) + 1;
-				int mDay = cal.get(Calendar.DAY_OF_MONTH);
-				int mHour = cal.get(Calendar.HOUR_OF_DAY);
-				int mMinute = cal.get(Calendar.MINUTE);
-
-				history_item.add(mHour + ":" + mMinute + " " + mDay + "-"
-						+ mMonth + "-" + mYear);
-				history_item.add("position:" + Integer.toString(temp));
-
-				tempArray.clear();
-				tempArray.addAll(data.getStringArrayListExtra("Item"));
-
-				history_item.add(tempArray.get(0));
-				history_item.add(tempArray.get(1));
-				history_item.add(tempArray.get(2));
-				history_item.add(tempArray.get(3));
-				history_item.add(tempArray.get(4));
-				history_item.add(tempArray.get(6));
-
-				if (data.getBooleanExtra("isModified", false)) {
-					history_item.add("Modified");
-				} else
-					history_item.add("Added");
-				myDb.addToHistory(Integer.toString(next_id), history_item);
+				saveToDatabase(data);
 			}
 	}
 

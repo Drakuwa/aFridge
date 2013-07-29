@@ -120,7 +120,7 @@
             android:layout_margin="5dip"
             android:layout_weight="1"
             android:background="@drawable/black_button_gradient"
-            android:text="Change" />
+            android:text="Edit" />
 
         <Button
             android:id="@+id/delete"
